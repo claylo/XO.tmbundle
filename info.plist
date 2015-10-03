@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>contactEmailRot13</key>
+	<string>pynl@ybiryrff.arg</string>
+	<key>contactName</key>
+	<string>Clay Loveless</string>
+	<key>description</key>
+	<string>TextMate bundle for XO https://www.npmjs.com/package/xo</string>
+	<key>name</key>
+	<string>XO</string>
+	<key>uuid</key>
+	<string>0578526E-5400-42DC-BC70-22E4FE72E2B8</string>
+</dict>
+</plist>
