@@ -14,28 +14,23 @@ TextMate.save_if_untitled('js')
 
 kudos = ["nice.", "sweet!", "beauty", "righteous"]
 
-cmd = '/usr/bin/env xo'
+project_dir = ENV['TM_PROJECT_DIRECTORY'] || ENV['TM_DIRECTORY'] || ''
+if !project_dir.empty?
+  Dir.chdir("#{project_dir}")
+end
 
-error = `#{cmd} #{ENV["TM_FILEPATH"]}`
+cmd = ENV['TM_XO'] || '/usr/bin/env xo' + ' --compact'
+cmd_opts = ENV['TM_XO_OPTIONS'] || ''
+cmd_opts = ' --compact ' + cmd_opts.chomp
+
+cmd = "#{cmd}#{cmd_opts}"
+
+error = `#{cmd} "#{ENV['TM_FILEPATH']}"`
 
 if error.include? 'problem'
-  
-  error_lines = error.lines.map(&amp;:chomp)
-  error_lines.shift
-  error_lines.shift
-  summary = error_lines.pop
-  error_lines.pop
-  
-  error_lines.each do |x| 
-    first = x.rpartition(' ').first
-    last = x.rpartition(' ').last
-    puts first + " (" + last + ")"
-  end
-  
-  puts "", summary
-  
-  if ( error =~ /(\d+):/ )
-    TextMate.go_to :line =&gt; $1
+  print error.gsub("#{ENV['TM_FILEPATH']}: ", '')
+  if ( error =~ /line (\d+), col (\d+)/ )
+    TextMate.go_to :line =&gt; $1, :column =&gt; $2
   end
 else
   print kudos[rand(kudos.length)]
